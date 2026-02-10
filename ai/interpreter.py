@@ -40,6 +40,7 @@ REGLA CLAVE: "fecha" SIEMPRE debe ser el LUNES de la semana consultada (formato 
   "imputaciones": [
     {{
       "proyecto": "Nombre EXACTO",
+      "semana": "YYYY-MM-DD",
       "horas": 8,
       "dias": ["lunes", "martes", "miercoles", "jueves", "viernes"]
     }}
