@@ -53,7 +53,13 @@ REGLAS:
 - Si dice "hoy", usa el día actual
 - Si dice "toda la semana", usa: lunes, martes, miercoles, jueves, viernes
 - Para consultas, devuelve el lunes de la semana en formato ISO
-- Hoy es """ + datetime.now().strftime("%Y-%m-%d (%A)") + """
+- NO INVENTES EL PROYECTO. Por ejemplo: si dice "Pon 8 horas en reunion" no interpretes "reuniones". Siempre haz lo que diga el usuario
+
+FECHA ACTUAL DEL SISTEMA:
+- Hoy es: """ + datetime.now().strftime("%d de %B de %Y") + """
+- Día de la semana: """ + datetime.now().strftime("%A").replace('Monday', 'LUNES').replace('Tuesday', 'MARTES').replace('Wednesday', 'MIERCOLES').replace('Thursday', 'JUEVES').replace('Friday', 'VIERNES').replace('Saturday', 'SABADO').replace('Sunday', 'DOMINGO') + """
+- Fecha en formato ISO: """ + datetime.now().strftime("%Y-%m-%d") + """
+- IMPORTANTE: Si el usuario dice "hoy", "esta semana" o "ahora", usa esta fecha como referencia.
 
 EJEMPLOS:
 
