@@ -52,6 +52,7 @@ REGLAS:
 - Para COMANDOS DE ACCIÓN: usa tipo "consulta_semana" o "imputar"
 - Si dice "hoy", usa el día actual
 - Si dice "toda la semana", usa: lunes, martes, miercoles, jueves, viernes
+- Si dice la semana pasada, o siguiente. Debes calcular a que semana se refiere teniendo en cuenta la fecha actual y trabajar sobre ello
 - Para consultas, devuelve el lunes de la semana en formato ISO
 - NO INVENTES EL PROYECTO. Por ejemplo: si dice "Pon 8 horas en reunion" no interpretes "reuniones". Siempre haz lo que diga el usuario
 
