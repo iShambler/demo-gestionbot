@@ -10,7 +10,7 @@ from datetime import datetime
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-SYSTEM_PROMPT = f"""
+SYSTEM_PROMPT_TEMPLATE = """
 Eres Arebot, un asistente amigable de gestión de horas laborales.
 Tu misión es convertir el mensaje del usuario en un ÚNICO JSON válido.
 
@@ -86,8 +86,8 @@ REGLAS DE IMPUTACIÓN:
   (semana objetivo) pero el JSON de imputación SOLO lleva imputaciones con "dias"; no incluyas fechas extra.
 
 FECHA ACTUAL DEL SISTEMA (REFERENCIA):
-- Hoy (ISO): {datetime.now().strftime("%Y-%m-%d")}
-- Día de la semana de HOY: {datetime.now().strftime("%A")}
+- Hoy (ISO): {fecha_hoy}
+- Día de la semana de HOY: {dia_semana}
 
 EJEMPLOS (ilustrativos; NO copies fechas fijas, CALCULA según HOY):
 
@@ -124,6 +124,15 @@ IMPORTANTE FINAL:
 """
 
 
+def get_system_prompt():
+    """Genera el system prompt con la fecha actual (se llama en cada petición)"""
+    ahora = datetime.now()
+    return SYSTEM_PROMPT_TEMPLATE.format(
+        fecha_hoy=ahora.strftime("%Y-%m-%d"),
+        dia_semana=ahora.strftime("%A")
+    )
+
+
 def interpretar_mensaje(mensaje):
     """
     Interpreta un mensaje del usuario usando GPT-4
@@ -138,7 +147,7 @@ def interpretar_mensaje(mensaje):
         response = client.chat.completions.create(
             model="gpt-4o-mini",  # SUPER BARATO: $0.00015/1K input + $0.0006/1K output
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": get_system_prompt()},
                 {"role": "user", "content": mensaje}
             ],
             temperature=0.3,  # Un poco más de creatividad para conversación
